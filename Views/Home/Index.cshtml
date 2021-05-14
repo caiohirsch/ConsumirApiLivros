@@ -1,0 +1,29 @@
+﻿@model List<ConsumirApiLivros.Models.Livro>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<br />
+<div>
+    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+    {
+        <span>Procure pelo nome do livro</span>
+        <br />
+        <br />
+        @Html.TextBox("searchQuery")
+        <input type="submit" value="Buscar" class="btn btn-primary" />
+    }
+    <br />
+    <br />
+    @if (Model != null && Model.Count > 0)
+    {
+        <ul>
+            @foreach (var livro in Model)
+            {
+                <li>@Html.ActionLink(@String.Format("{0} - {1}", livro.Titulo, livro.Autor), "Index", "Lyrics", new { id = livro.ID })</li>
+            }
+        </ul>
+    }
+
+</div>
